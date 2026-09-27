@@ -138,7 +138,7 @@ textarea{min-height:70px;resize:vertical;line-height:1.45}
   .app{grid-template-columns:1fr}
   nav.side{display:none}
   .topbar{display:none}
-  .mobile-nav{display:flex;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--line);overflow-x:auto;padding:6px}
+  .mobile-nav{display:flex;align-items:center;justify-content:space-between;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--line);padding:8px 12px;gap:8px}
   .mobile-nav button{background:none;border:0;color:var(--side-ink);padding:8px 12px;white-space:nowrap;border-radius:6px;display:flex;gap:6px;align-items:center;font-weight:500}
   .mobile-nav button svg{display:none}
   .mobile-nav button.on{color:var(--side-active);background:var(--primary-soft);font-weight:600}
@@ -425,13 +425,115 @@ fieldset[disabled]{opacity:.7}
 .cal-extra{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;border:1px dashed var(--line);border-radius:8px;background:var(--line2);padding:6px 8px;font-size:.78rem;color:var(--ink);cursor:pointer}
 .cal-extra .ic{display:none}.cal-extra small{color:var(--muted);font-size:.72rem}
 .tabs button .ic{vertical-align:-3px}
-@media print{nav.side,.topbar,.mobile-nav,.head .row,.tabs,.btn{display:none!important}.app{display:block}.panel{box-shadow:none;border:0}}
+
+.bnav{display:none}
+.filt-toggle{display:none}
+@media (max-width:860px){
+  .bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--panel);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));box-shadow:0 -4px 16px rgba(16,24,40,.08)}
+  .bnav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--muted);font-size:.66rem;font-weight:500;padding:7px 2px 6px;border-radius:10px;position:relative;cursor:pointer}
+  .bnav button svg{width:22px;height:22px}
+  .bnav button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .bnav button.on{color:var(--primary);background:var(--primary-soft);font-weight:700}
+  .bnav .badge{position:absolute;top:2px;left:calc(50% + 6px);font-style:normal;font-size:.62rem;padding:0 5px;line-height:16px}
+  body.authing .bnav{display:none!important}
+  main{padding:16px 14px calc(96px + env(safe-area-inset-bottom,0px))!important}
+  #toasts{bottom:calc(84px + env(safe-area-inset-bottom,0px));right:12px;left:12px;align-items:stretch}
+  .toast{text-align:center}
+  .mobile-nav .sys-logo.m{border:0;padding:0;margin:0}
+  .mobile-nav .sys-logo.m img{height:32px}
+  .mtools{gap:4px;padding-left:0}
+  .mtools .icon-btn{width:36px;height:36px}
+  .mtools [data-tool="fs"]{display:none}
+  h1{font-size:1.3rem}
+  .head{margin-bottom:14px;align-items:flex-start}
+  .head p{font-size:.85rem}
+  .head>.row,.head>.btn{width:100%}
+  .head>.row .btn,.head>.btn{flex:1 1 auto;justify-content:center}
+  .head>.row .seg{flex:1 1 100%}
+  .head>.row .seg button{flex:1;justify-content:center}
+  .panel{padding:14px;border-radius:12px}
+  .kpis{grid-template-columns:1fr 1fr;gap:10px}
+  .kpi{padding:12px;column-gap:10px}
+  .kic{width:36px;height:36px;border-radius:10px}.kic .ic{width:20px;height:20px}
+  .kpi b{font-size:1.45rem}.kpi span:not(.kic){font-size:.74rem}
+  .filters{padding:10px 12px;gap:10px}
+  .filt-toggle{display:flex;align-items:center;gap:8px;width:100%;background:none;border:0;padding:6px 2px;font-weight:600;color:var(--ink);cursor:pointer;text-align:left}
+  .filt-toggle span{flex:1}
+  .filters:not(.open)>label,.filters:not(.open)>[data-act="limpar-filtros"]{display:none}
+  .filters label.f,.filters label.grow{flex:1 1 100%;min-width:0}
+  input,select,textarea{font-size:16px!important}
+  .heat td.name{position:sticky;left:0;z-index:2;background:var(--panel);min-width:150px;max-width:170px;padding-right:8px}
+  .heat td.name .nm span.picto{display:none}
+  .heat td.name b{font-size:.8rem}
+  .heat th.m{min-width:46px}
+  .cell{height:38px;font-size:.74rem}
+  .ind-grid{grid-template-columns:1fr}
+  .ind-card{padding:14px}
+  .ind-top{flex-wrap:nowrap}.ind-top .ind-name{min-width:0;flex:1}.ind-val b{font-size:1.15rem}
+  .ind-actions{flex-wrap:wrap;gap:8px}
+  .ind-actions>.row{width:100%}.ind-actions>.row .btn{flex:1;justify-content:center}
+  .zoom-hint{opacity:1;top:auto;bottom:6px}
+  .tabs button{padding:10px 12px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .cal-mes.off:not(.has-ex){display:none}
+  .cal-grid{grid-template-columns:1fr}
+  .cal-mes{min-height:0}
+  .cal-bar{padding:10px 12px}
+  .cal-bar>.row:last-child{width:100%}
+  .zstats{grid-template-columns:1fr 1fr}
+  .zstat{padding:6px 8px}.zic{width:28px;height:28px}
+  .modal.lg{overflow-y:auto;padding:max(12px,env(safe-area-inset-top,0px)) 14px max(12px,env(safe-area-inset-bottom,0px))}
+  .modal.lg .zchart{min-height:300px;flex:none;height:44vh}
+  .modal.lg .zhead{flex-direction:column-reverse;align-items:stretch;gap:10px}
+  .modal.lg .zhead>.row{justify-content:flex-end;flex-wrap:wrap}
+  .modal.lg .zhead>.row .acoes-btn{margin-right:auto;white-space:normal;text-align:left}
+  .modal.lg .zhead .ind-name h2{font-size:1.1rem}
+  .modal.lg .actions{flex-wrap:wrap;gap:8px}
+  .modal.lg .actions>.row{width:100%}
+  .modal.lg .actions>.row .btn{flex:1;justify-content:center}
+  #toasts .toast:not(:last-child){display:none}
+  .assin-banner{flex-wrap:wrap}
+  .assin-banner>.btn{width:100%;justify-content:center}
+  .ent-foot{flex-direction:column;align-items:stretch}
+  .ent-ind-btns{width:100%;justify-content:flex-end}
+  table{font-size:.85rem}
+  .icon-btn{min-width:36px;min-height:36px}
+}
+@media (max-width:640px){
+  .modal-bg:not(.center){padding:0;align-items:stretch}
+  .modal:not(.lg){border-radius:0;min-height:100%;min-height:100dvh;max-width:none!important;padding:18px 16px 0;border:0;display:flex;flex-direction:column}
+  .modal:not(.lg)>.actions{position:sticky;bottom:0;background:var(--panel);margin:auto -16px 0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));flex-wrap:wrap;border-top:1px solid var(--line);z-index:2}
+  .modal:not(.lg)>.actions .btn{flex:1 1 auto;justify-content:center}
+  .modal.sobre{padding:0}
+  .sobre-body{padding:18px 16px}
+  .results-grid{grid-template-columns:repeat(3,1fr)}
+  .assin-doc{max-height:45vh}
+}
+
+.drawer-bg{display:none}
+.side-extra{display:none}
+.burger{flex:none}
+@media (max-width:860px){
+  .mobile-nav{justify-content:flex-start}
+  .mobile-nav .sys-logo.m{margin-right:auto!important}
+  body.drawer-open nav.side{display:flex!important;position:fixed;top:0;left:0;bottom:0;height:100vh;height:100dvh;width:min(84vw,300px);z-index:70;overflow-y:auto;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:max(16px,env(safe-area-inset-bottom,0px));box-shadow:8px 0 30px rgba(0,0,0,.25);animation:drw .2s ease-out}
+  body.drawer-open .drawer-bg{display:block;position:fixed;inset:0;background:rgba(10,17,26,.5);z-index:65}
+  body.drawer-open{overflow:hidden}
+  nav.side button{padding:12px}
+  .side-extra{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .side-extra .btn{padding-left:0}
+}
+@keyframes drw{from{transform:translateX(-100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){body.drawer-open nav.side{animation:none}}
+@media print{nav.side,.topbar,.mobile-nav,.bnav,.head .row,.tabs,.btn{display:none!important}.app{display:block}.panel{box-shadow:none;border:0}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <div id="auth" hidden></div>
 <div class="mobile-nav" id="mnav"></div>
+<div class="drawer-bg" id="drawer-bg" data-tool="menu-close"></div>
+<nav class="bnav" id="bnav" aria-label="Navegação principal"></nav>
 <div class="app">
   <nav class="side" id="snav"></nav>
   <div class="content"><div class="topbar"><div class="tb-left"><div class="crumb" id="crumb"></div></div><div class="meta" id="tmeta"></div></div>
@@ -596,6 +698,9 @@ const IC={
  right:'<path d="M9 18l6-6-6-6"/>',
  zoom:'<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
  recolher:'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>',
+ menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ moon:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
  pen:'<path d="M3 21c3-1 5-3 7-6"/><path d="M14.5 4.5l5 5L10 19l-6 2 2-6z"/><path d="M13 6l5 5"/>',
  lock:'<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
@@ -649,7 +754,8 @@ function filtroBar(){
   if(!inds.length)return "";
   const procs=[...new Set(inds.map(i=>i.processo).filter(Boolean))].sort();
   const ativos=[UI.fProc,UI.fInd,UI.fSit,UI.busca].filter(Boolean).length;
-  return `<div class="filters">
+  return `<div class="filters ${UI.filtrosAbertos?"open":""}">
+    <button class="filt-toggle" data-act="toggle-filtros" aria-expanded="${!!UI.filtrosAbertos}">${ic("search")}<span>Filtros · ${fmtMes(UI.periodo)}${ativos?` · ${ativos} ativo${ativos>1?"s":""}`:""}</span>${ic(UI.filtrosAbertos?"left":"right")}</button>
     <label class="f grow">Buscar<span class="search">${ic("search")}<input type="search" id="busca" value="${esc(UI.busca)}" placeholder="Nome, processo ou responsável"></span></label>
     <label class="f">Processo<select id="fProc"><option value="">Todos</option>${procs.map(p=>`<option ${p===UI.fProc?"selected":""}>${esc(p)}</option>`).join("")}</select></label>
     <label class="f">Indicador<select id="fInd"><option value="">Todos</option>${inds.filter(i=>!UI.fProc||i.processo===UI.fProc).map(i=>`<option value="${i.id}" ${i.id===UI.fInd?"selected":""}>${esc(i.nome)}</option>`).join("")}</select></label>
@@ -981,6 +1087,12 @@ function matrizHtml(){
   </tbody></table></div></div>`;
 }
 
+function fecharMenu(){if(document.body.classList.contains("drawer-open")){document.body.classList.remove("drawer-open");renderNav();}}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")fecharMenu();});
+function isMobile(){return matchMedia("(max-width:860px)").matches;}
+let _mob=isMobile();window.addEventListener("resize",()=>{const m=isMobile();if(m!==_mob){_mob=m;if(!modalOpen)render();}});
+const CURTO={painel:"Painel",indicadores:"Indicadores",reunioes:"Reuniões",acoes:"Ações",assinaturas:"Assinar",funcionarios:"Equipe"};
+
 /* ---------- Tema e tela cheia ---------- */
 function temaAtual(){return document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}
 function alternarTema(){const n=temaAtual()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("ac-theme",n);}catch(e){}renderNav();}
@@ -1021,8 +1133,9 @@ function renderNav(){
   const emp=cfg().empresa;
   document.getElementById("snav").innerHTML=`<div class="brand sys"><span class="sys-logo side">${sysLogo()}</span></div><div class="navlabel">Menu</div>`+
     VIEWS.map(([v,l])=>item(v,l)).join("")+
-    `<div class="side-foot">${me?`<div class="me-box"><span class="me-av">${esc(iniciais(me.nome))}</span><div><b>${esc(me.nome)}</b><small>${NIVEIS[me.nivel]}</small></div></div><div class="row" style="gap:6px;margin:8px 0 0"><button class="btn sm" data-me="conta">${ic("pen")}Minha conta</button><button class="btn sm ghost" data-me="sair">${ic("logout")}Sair</button></div>`:""}</div>`;
-  document.getElementById("mnav").innerHTML=`<span class="sys-logo m">${sysLogo()}</span>`+VIEWS.map(([v,l])=>item(v,l)).join("")+`<span class="mtools">${toolBtns(true)}</span>`;
+    `<div class="side-foot">${me?`<div class="me-box"><span class="me-av">${esc(iniciais(me.nome))}</span><div><b>${esc(me.nome)}</b><small>${NIVEIS[me.nivel]}</small></div></div><div class="row" style="gap:6px;margin:8px 0 0"><button class="btn sm" data-me="conta">${ic("pen")}Minha conta</button><button class="btn sm ghost" data-me="sair">${ic("logout")}Sair</button></div>`:""}<div class="side-extra"><button class="btn sm ghost" data-tool="tema">${ic(temaAtual()==="dark"?"sun":"moon")}${temaAtual()==="dark"?"Tema claro":"Tema escuro"}</button><button class="btn sm ghost" data-tool="sobre">${ic("info")}Sobre o sistema</button></div></div>`;
+  document.getElementById("mnav").innerHTML=`<button class="icon-btn burger" data-tool="menu" aria-label="Abrir menu" aria-expanded="${document.body.classList.contains("drawer-open")}">${ic("menu")}</button><span class="sys-logo m">${sysLogo()}</span><span class="mtools">${me?`<button class="icon-btn" data-tool="conta" aria-label="Minha conta">${ic("person")}</button>`:""}</span>`;
+  document.getElementById("bnav").innerHTML=VIEWS.filter(([v])=>perm[v]).map(([v,l])=>`<button class="${cur===v?"on":""}" data-nav="${v}" aria-label="${l}">${ICON[v]||ic("pen")}<span>${CURTO[v]||l}</span>${v==="acoes"&&atrasadas?`<i class="badge">${atrasadas}</i>`:""}${v==="assinaturas"&&pendAss?`<i class="badge">${pendAss}</i>`:""}</button>`).join("");
   const label=(VIEWS.find(x=>x[0]===cur)||[,""])[1];
   const r=UI.view==="reuniao"&&S.reunioes[UI.reuniaoId];
   document.getElementById("crumb").innerHTML=`Sistema de gestão / <b>${esc(label)}</b>${r?` / ${esc(r.titulo||"")}`:""}`;
@@ -1031,11 +1144,11 @@ function renderNav(){
 function sigla(t){if(!t)return "SG";const w=t.trim().split(/\s+/).filter(x=>x.length>2||/^[A-Z]/.test(x));return ((w[0]||"S")[0]+((w[1]||w[0]||"G")[w[1]?0:1]||"")).toUpperCase();}
 document.addEventListener("click",e=>{
   const n=e.target.closest("[data-nav]");
-  if(n){UI.view=n.dataset.nav;render();window.scrollTo(0,0);return;}
+  if(n){fecharMenu();UI.view=n.dataset.nav;render();window.scrollTo(0,0);return;}
   const t=e.target.closest("[data-tool]");
-  if(t){const k=t.dataset.tool;if(k==="tema")alternarTema();else if(k==="fs")alternarTelaCheia();else if(k==="sair")sair();else if(k==="conta")modalConta();else if(k==="sobre")modalSobre();return;}
+  if(t){const k=t.dataset.tool;if(k==="menu"){document.body.classList.toggle("drawer-open");renderNav();return;}if(k==="menu-close"){fecharMenu();return;}if(k!=="tema")fecharMenu();if(k==="tema")alternarTema();else if(k==="fs")alternarTelaCheia();else if(k==="sair")sair();else if(k==="conta")modalConta();else if(k==="sobre")modalSobre();return;}
   const me=e.target.closest("[data-me]");
-  if(me){if(me.dataset.me==="sair")sair();else modalConta();}
+  if(me){fecharMenu();if(me.dataset.me==="sair")sair();else modalConta();}
 });
 
 function render(){
@@ -1085,7 +1198,7 @@ function viewPainel(){
     <div class="kpi bad"><span class="kic">${ic("bad")}</span><span>Meta não atingida</span><b>${cont.bad}</b></div>
     <div class="kpi pri"><span class="kic">${ic("clipboard")}</span><span>Ações em aberto${atrasadas.length?` · ${atrasadas.length} atrasada${atrasadas.length>1?"s":""}`:""}</span><b>${abertas.length}</b></div>
   </div>
-  <div class="panel"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 class="hi">${ic("traffic")}Semáforo dos indicadores — ${fmtMes(UI.periodo)}</h2>${cont.none&&inds.length?`<span class="small muted">${cont.none} sem resultado no período</span>`:""}</div>${heatmap(UI.periodo,inds)}</div>
+  <div class="panel"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 class="hi">${ic("traffic")}Semáforo dos indicadores — ${fmtMes(UI.periodo)}</h2>${cont.none&&inds.length?`<span class="small muted">${cont.none} sem resultado no período</span>`:""}</div>${heatmap(UI.periodo,inds,isMobile()?6:12)}</div>
   <div class="grid2">
     <div class="panel"><h3 class="hi">${ic("clock")}Ações atrasadas</h3>${atrasadas.length?`<table><tbody>${atrasadas.slice(0,8).map(a=>`<tr class="click" data-edit-acao="${a.id}"><td>${esc(a.oque)}<div class="small muted">${esc(a.quem||"sem responsável")}</div></td><td class="small" style="color:var(--bad);white-space:nowrap">${fmtData(a.quando)}</td></tr>`).join("")}</tbody></table>`:`<p class="muted small">Nenhuma ação atrasada.</p>`}</div>
     <div class="panel"><h3 class="hi">${ic("calendar")}Reuniões de análise crítica</h3>${(()=>{const px=proximaPrevista();return px?`<p class="small" style="margin:8px 0 0">${ic("flag")} Próxima prevista: <b>${fmtData(px.data)}</b> (${esc(FREQS[calCfg().frequencia][0].toLowerCase())})</p>`:"";})()}<p class="small muted" style="margin:10px 0 0">Última registrada:</p>${prox?`<p style="margin:8px 0 4px"><b>${esc(prox.titulo||"Análise crítica")}</b></p><p class="muted small" style="margin:0 0 12px">${fmtData(prox.data)} · ${prox.status==="concluida"?"Concluída":"Em preparação"}</p><button class="btn sm" data-open-reuniao="${prox.id}">${ic("file")}Abrir reunião</button>`:`<p class="muted small">Nenhuma reunião registrada.</p><button class="btn sm pri" data-act="nova-reuniao">${ic("calendar")}Agendar reunião</button>`}</div>
@@ -1097,7 +1210,7 @@ function cardIndicador(i,periodo,extra){
   const v=valorPeriodo(i,periodo); const st=statusValor(i,v);
   return `<div class="ind-card"><div class="ind-top"><div class="ind-name">${picto(i,st)}<div><h3>${esc(i.nome)}</h3><span class="small muted">${esc(i.processo||"—")} · ${esc(i.responsavel||"sem responsável")} · meta ${esc(metaTxt(i))}</span></div></div>
   <div class="ind-val"><b>${fmtNum(v)}</b> <span class="small muted">${esc(i.unidade||"")}</span><br>${pill(st)}</div></div>
-  <div class="chart-zoom" data-zoom="${i.id}" data-per="${periodo}" role="button" tabindex="0" aria-label="Ampliar gráfico de ${esc(i.nome)}">${chartSVG(i,ultimosMeses(periodo,12),null,periodo)}<span class="zoom-hint">${ic("zoom")}Ampliar</span></div>${extra||""}</div>`;
+  <div class="chart-zoom" data-zoom="${i.id}" data-per="${periodo}" role="button" tabindex="0" aria-label="Ampliar gráfico de ${esc(i.nome)}">${isMobile()?chartSVG(i,ultimosMeses(periodo,6),null,periodo,{W:360,H:200,F:1}):chartSVG(i,ultimosMeses(periodo,12),null,periodo)}<span class="zoom-hint">${ic("zoom")}Ampliar</span></div>${extra||""}</div>`;
 }
 function viewIndicadores(){
   const all=indsV(), f=indsFiltrados();
@@ -1266,7 +1379,7 @@ function viewCalendario(){
   const cards=Array.from({length:12},(_,k)=>{
     const m=k+1,s=bySlot[m],mk=`${y}-${p2(m)}`,ex=extras.filter(r=>r.data.slice(0,7)===mk);
     const exHtml=ex.map(r=>`<button class="cal-extra" data-open-reuniao="${r.id}">${ic("file")}${esc(r.titulo)}<small>Sem vínculo · ${fmtData(r.data)}</small></button>`).join("");
-    if(!s)return `<div class="cal-mes off"><div class="cal-top"><b>${MESES_LONGO[k]}</b></div><p class="cal-none">${mk<calCfg().inicio?"Antes do início do calendário":"Sem reunião prevista"}</p>${exHtml}</div>`;
+    if(!s)return `<div class="cal-mes off ${ex.length?"has-ex":""}"><div class="cal-top"><b>${MESES_LONGO[k]}</b></div><p class="cal-none">${mk<calCfg().inicio?"Antes do início do calendário":"Sem reunião prevista"}</p>${exHtml}</div>`;
     const x=statusSlot(s),isProx=prox&&prox.key===s.key;
     return `<div class="cal-mes ${x.st} ${isProx?"prox":""}"><div class="cal-top"><b>${MESES_LONGO[k]}</b>${isProx?`<span class="pill warn">${ic("flag")}Próxima</span>`:""}</div>
       <div class="cal-date"><span class="cal-dia">${s.data.slice(8,10)}</span><div><b>${fmtData(s.data)}</b><small>${esc(calCfg().hora||"")}${s.ajustada?" · reagendada":""}</small></div></div>
@@ -1635,6 +1748,8 @@ function tabelaAtaAcoes(arr){
 function tabelaAcoes(arr,vazio){
   if(!arr.length)return `<p class="muted small">${vazio}</p>`;
   arr=arr.slice().sort((a,b)=>(a.quando||"9").localeCompare(b.quando||"9"));
+  if(isMobile())return `<div class="acoes-list" style="max-height:none">${arr.map(a=>{const atr=acaoAtrasada(a);const cls=a.status==="concluida"?"ok":atr?"bad":a.status==="cancelada"?"none":"pri";const ind=a.indicadorId&&S.indicadores[a.indicadorId];
+    return `<button class="acao-item ${cls}" data-edit-acao="${a.id}"><span class="acao-ic">${ic(a.status==="concluida"?"ok":atr?"alert":a.status==="cancelada"?"none":"clock")}</span><span class="acao-txt"><b>${esc(a.oque)}</b>${ind?`<small>${esc(ind.nome)}</small>`:""}<span class="acao-meta">${ic("person")}${esc(a.quem||"Sem responsável")}<span>${ic("calendar")}${fmtData(a.quando)}</span></span></span><span class="acao-st"><span class="pill ${cls}">${atr?"Atrasada":STATUS_ACAO[a.status]}</span>${a.status==="concluida"?`<small>${EFICACIA[a.eficacia||"pendente"]}</small>`:""}</span></button>`;}).join("")}</div>`;
   return `<div class="scroll"><table><thead><tr><th>O quê</th><th>Origem</th><th>Quem</th><th>Quando</th><th>Situação</th><th>Eficácia</th></tr></thead><tbody>`+
   arr.map(a=>{const atr=acaoAtrasada(a);const ind=a.indicadorId&&S.indicadores[a.indicadorId];const reu=a.reuniaoId&&S.reunioes[a.reuniaoId];
     const cls=a.status==="concluida"?"ok":atr?"bad":a.status==="cancelada"?"none":"pri";
@@ -1684,7 +1799,7 @@ function modalAcao(id,preset={}){
 /* ---------- Gráfico ampliado ---------- */
 function modalGrafico(id,per,n0){
   const listaIds=(UI.view==="reuniao"&&S.reunioes[UI.reuniaoId]?indsFiltrados(S.reunioes[UI.reuniaoId].periodo):indsFiltrados()).map(i=>i.id);
-  const st={id,per:per||UI.periodo,n:n0||12};
+  const st={id,per:per||UI.periodo,n:n0||(isMobile()?6:12)};
   const draw=()=>{
     const i=S.indicadores[st.id]; if(!i)return `<p>Indicador não encontrado.</p><div class="actions"><button class="btn" data-m="close">Fechar</button></div>`;
     const meses=ultimosMeses(st.per,st.n);
@@ -1842,6 +1957,7 @@ document.getElementById("main").addEventListener("click",async e=>{
   else if(d.act==="nova-acao")modalAcao();
   else if(d.act==="novo-func")modalFunc();
   else if(d.act==="csv")exportarCSV();
+  else if(d.act==="toggle-filtros"){UI.filtrosAbertos=!UI.filtrosAbertos;render();}
   else if(d.act==="cal-config")modalCalConfig();
   else if(d.reutab){UI.reuTab=d.reutab;render();}
   else if(d.calAno){UI.calAno=+d.calAno;render();}
